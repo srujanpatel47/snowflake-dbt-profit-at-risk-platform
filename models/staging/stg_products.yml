@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: stg_products
+    description: "Staging model for products with numeric casting and cleaned category names."
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+      # product_category_name can be null in raw source, so no not_null test here
+      - name: product_category_name

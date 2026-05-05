@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: int_order_value_enriched
+    description: "Order-level enriched model combining orders, items, payments, and review aggregates."
+    columns:
+      - name: order_id
+        description: "Primary key for order-level grain."
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "Customer placing the order."
+        tests:
+          - not_null
+
+      - name: order_status
+        description: "Standardized order status."
+        tests:
+          - not_null
+
+      - name: items_gross_value
+        description: "Sum of item prices per order."
+
+      - name: freight_value
+        description: "Sum of freight values per order."
+
+      - name: payment_value_total
+        description: "Sum of payment values per order."
+
+      - name: avg_review_score
+        description: "Average review score for the order."
+
+      - name: order_gross_plus_freight
+        description: "items_gross_value + freight_value with null-safe fallback."
+
+      - name: payment_to_order_delta
+        description: "payment_value_total - order_gross_plus_freight."

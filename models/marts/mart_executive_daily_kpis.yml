@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: mart_executive_daily_kpis
+    description: "Daily executive KPI mart for orders, payments, delivery performance, and cancellation trends."
+    columns:
+      - name: order_date
+        description: "Order purchase date used as mart grain (one row per date)."
+        tests:
+          - not_null
+          - unique
+
+      - name: total_orders
+        description: "Distinct count of orders created on the date."
+        tests:
+          - not_null
+
+      - name: total_customers
+        description: "Distinct count of customers placing orders on the date."
+
+      - name: gross_order_value
+        description: "Sum of item value plus freight across all orders for the date."
+        tests:
+          - not_null
+
+      - name: total_payment_value
+        description: "Sum of all payments captured for orders on the date."
+
+      - name: avg_payment_order_delta
+        description: "Average difference between payment total and order gross-plus-freight."
+
+      - name: avg_review_score
+        description: "Average review score for orders associated with the date."
+
+      - name: on_time_orders
+        description: "Count of orders delivered on or before estimated date."
+
+      - name: on_time_delivery_rate
+        description: "On-time orders divided by total orders."
+        tests:
+          - not_null
+
+      - name: canceled_orders
+        description: "Count of orders with canceled status."
+
+      - name: canceled_order_rate
+        description: "Canceled orders divided by total orders."
+        tests:
+          - not_null

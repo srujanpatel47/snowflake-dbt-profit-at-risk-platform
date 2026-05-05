@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_payments
+    description: "Staging model for payments with numeric casting and payment type standardization."
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+
+      - name: payment_type
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['credit_card', 'boleto', 'voucher', 'debit_card', 'not_defined']
+
+      - name: payment_value
+        tests:
+          - not_null
