@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.10"
 
@@ -48,13 +48,13 @@ jobs:
           EOF
 
       - name: dbt debug
-        working-directory: dbt_project
+        working-directory: .
         run: dbt debug
 
       - name: dbt parse
-        working-directory: dbt_project
+        working-directory: .
         run: dbt parse
 
       - name: dbt build
-        working-directory: dbt_project
+        working-directory: .
         run: dbt build --select staging intermediate marts
