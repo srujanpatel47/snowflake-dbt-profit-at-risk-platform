@@ -53,7 +53,7 @@ jobs:
 
       - name: dbt parse
         working-directory: .
-        run: dbt parsee
+        run: dbt parse
 
       - name: dbt build
         working-directory: .
