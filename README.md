@@ -1,16 +1,8 @@
-Welcome to your new dbt project!
+## Free-Safe CI Mode
 
-## Using the starter project
+This repository uses a free-safe GitHub Actions workflow for public validation.
 
-Try running the following commands:
+Because the Snowflake trial account may expire or warehouses may be suspended, the default CI workflow runs:
 
-- dbt run
-- dbt test
-
-## Resources:
-
-- Learn more about dbt in the docs: https://docs.getdbt.com/docs/introduction
-- Check out Discourse: https://discourse.getdbt.com/
-- Join the dbt community Slack: https://community.getdbt.com/
-- Find dbt events: https://events.getdbt.com
-- Read the dbt blog: https://blog.getdbt.com/
+```bash
+dbt parse
