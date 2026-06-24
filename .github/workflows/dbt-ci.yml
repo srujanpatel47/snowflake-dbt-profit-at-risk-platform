@@ -2,9 +2,9 @@ name: dbt-ci
 
 on:
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
   push:
-    branches: [ main, master ]
+    branches: [main, master]
 
 jobs:
   dbt-validate:
@@ -58,3 +58,10 @@ jobs:
       - name: dbt build
         working-directory: .
         run: dbt build --select staging intermediate marts
+
+      - name: Notify Slack on failure
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"❌ dbt CI failed in repo ${{ github.repository }} on branch ${{ github.ref_name }}. Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
